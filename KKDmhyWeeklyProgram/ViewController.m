@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "ASIHTTPRequest.h"
-#import "DayProgram.h"
+#import "Anime.h"
 #import "DaysHeaderView.h"
 #import "AnimeCell.h"
 #import "UIImageView+WebCache.h"
@@ -23,10 +23,10 @@
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate>{
     
     NSMutableArray *weeklyProgramArray;
+    NSMutableArray *programArray;
 }
 
 @property (nonatomic , weak) IBOutlet UICollectionView *animeCollectionView;
-@property (nonatomic , strong) NSMutableArray *programArray;
 
 @end
 
@@ -34,10 +34,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     self.title = @"Dmhy番組表";
-    self.programArray = [NSMutableArray array];
-    
+    programArray = [NSMutableArray array];
     
     NSString *dictPath = [[NSBundle mainBundle] pathForResource:@"program" ofType:@"plist"];
     weeklyProgramArray = [NSMutableArray arrayWithContentsOfFile:dictPath];
@@ -57,11 +55,6 @@
     UINib *cellNib = [UINib nibWithNibName:@"AnimeCell" bundle:nil];
     [self.animeCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"AnimeCell"];
 
-    
-//    //load html form file
-//    NSString *sourcePath = [[NSBundle mainBundle] pathForResource:@"program" ofType:@"html"];
-//    NSString *htmlSource = [NSString stringWithContentsOfFile:sourcePath encoding:NSUTF8StringEncoding error:NULL];
-//    [self parseSource:htmlSource];
     
     //get html
     [self loadDmhyHtml];
@@ -121,15 +114,7 @@
     
      http://www.toei-anim.co.jp/tv/onep/
      */
-    
-    //sunarray
-    //monarray
-    //tuearray
-    //wedarray
-    //thuarray
-    //friarray
-    //satarray
-    
+
     
     for(NSDictionary *dayDict in weeklyProgramArray){
         
@@ -145,18 +130,18 @@
             
             NSTextCheckingResult *match = [regexMatches objectAtIndex:i];
             
-            NSString *anime = [htmlSource substringWithRange:match.range];
+            NSString *animeData = [htmlSource substringWithRange:match.range];
             
-            anime = [anime stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@.push([",regexName] withString:@""];
-            anime = [anime stringByReplacingOccurrencesOfString:@"]);" withString:@""];
-            anime = [anime stringByReplacingOccurrencesOfString:@"'" withString:@""];
-            anime = [anime stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];;
+            animeData = [animeData stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@.push([",regexName] withString:@""];
+            animeData = [animeData stringByReplacingOccurrencesOfString:@"]);" withString:@""];
+            animeData = [animeData stringByReplacingOccurrencesOfString:@"'" withString:@""];
+            animeData = [animeData stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];;
             
-            DayProgram *program = [[DayProgram alloc] initWithSource:anime];
-            [dayProgramArray addObject:program];
+            Anime *anime = [[Anime alloc] initWithSource:animeData];
+            [dayProgramArray addObject:anime];
         }
         
-        [self.programArray addObject:dayProgramArray];
+        [programArray addObject:dayProgramArray];
     }
     
 
@@ -171,9 +156,9 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    if(self.programArray.count > 0){
+    if(programArray.count > 0){
         
-        NSMutableArray *dayProgramArray = [self.programArray objectAtIndex:section];
+        NSMutableArray *dayProgramArray = [programArray objectAtIndex:section];
         if(dayProgramArray.count > 0){
             return dayProgramArray.count;
         }
@@ -184,8 +169,8 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
-    if(self.programArray.count > 0){
-        return self.programArray.count;
+    if(programArray.count > 0){
+        return programArray.count;
     }
     return 0;
 }
@@ -193,12 +178,12 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     AnimeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AnimeCell" forIndexPath:indexPath];
-    NSMutableArray *dayProgramArray = [self.programArray objectAtIndex:indexPath.section];
-    DayProgram *program = [dayProgramArray objectAtIndex:indexPath.row];
-    cell.title.text = program.animeName;
+    NSMutableArray *dayProgramArray = [programArray objectAtIndex:indexPath.section];
+    Anime *anime = [dayProgramArray objectAtIndex:indexPath.row];
+    cell.title.text = anime.animeName;
     NSDictionary *dayDict = [weeklyProgramArray objectAtIndex:indexPath.section];
     cell.title.backgroundColor = [self colorFromHexString:[dayDict objectForKey:@"Color"]];
-    [cell.image sd_setImageWithURL:[NSURL URLWithString:program.imageUrl]
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:anime.imageUrl]
                   placeholderImage:nil options:SDWebImageRefreshCached];
     
     return cell;
@@ -225,11 +210,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSMutableArray *dayProgramArray = [self.programArray objectAtIndex:indexPath.section];
-    DayProgram *program = [dayProgramArray objectAtIndex:indexPath.row];
+    NSMutableArray *dayProgramArray = [programArray objectAtIndex:indexPath.section];
+    Anime *anime = [dayProgramArray objectAtIndex:indexPath.row];
  
     FansubTableViewController *controller = [[FansubTableViewController alloc] init];
-    controller.dayProgram = program;
+    controller.anime = anime;
     [self.navigationController pushViewController:controller animated:YES];
     
 }

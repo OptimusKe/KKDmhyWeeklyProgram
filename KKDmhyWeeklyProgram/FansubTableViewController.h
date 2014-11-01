@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DayProgram.h"
+#import "Anime.h"
 
 @interface FansubTableViewController : UITableViewController
 
-@property(nonatomic , weak) DayProgram *dayProgram;
+@property(nonatomic , weak) Anime *anime;
 
 @end

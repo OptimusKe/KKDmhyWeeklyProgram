@@ -22,7 +22,7 @@
     [super viewDidLoad];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
-    self.title = self.dayProgram.animeName;
+    self.title = self.anime.animeName;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,8 +39,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    if(self.dayProgram){
-        return self.dayProgram.fansubsArray.count;
+    if(self.anime){
+        return self.anime.fansubsArray.count;
     }
         
     return 0;
@@ -50,7 +50,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    NSDictionary *fansubDict = [self.dayProgram.fansubsArray objectAtIndex:indexPath.row];
+    NSDictionary *fansubDict = [self.anime.fansubsArray objectAtIndex:indexPath.row];
     
     if(fansubDict){
         cell.textLabel.text = fansubDict[@"Title"];
@@ -61,7 +61,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSDictionary *fansubDict = [self.dayProgram.fansubsArray objectAtIndex:indexPath.row];
+    NSDictionary *fansubDict = [self.anime.fansubsArray objectAtIndex:indexPath.row];
     
     if(fansubDict){
         NSURL *URL = [NSURL URLWithString:[fansubDict objectForKey:@"Link"]];
