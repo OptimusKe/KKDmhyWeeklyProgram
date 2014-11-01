@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Title</key>
+		<string>星期日</string>
+		<key>RegexName</key>
+		<string>sunarray</string>
+		<key>Color</key>
+		<string>#336600</string>
+	</dict>
+	<dict>
+		<key>Title</key>
+		<string>星期一</string>
+		<key>RegexName</key>
+		<string>monarray</string>
+		<key>Color</key>
+		<string>#990066</string>
+	</dict>
+	<dict>
+		<key>Title</key>
+		<string>星期二</string>
+		<key>RegexName</key>
+		<string>tuearray</string>
+		<key>Color</key>
+		<string>#6666FF</string>
+	</dict>
+	<dict>
+		<key>Title</key>
+		<string>星期三</string>
+		<key>RegexName</key>
+		<string>wedarray</string>
+		<key>Color</key>
+		<string>#880000</string>
+	</dict>
+	<dict>
+		<key>Title</key>
+		<string>星期四</string>
+		<key>RegexName</key>
+		<string>thuarray</string>
+		<key>Color</key>
+		<string>#CC6600</string>
+	</dict>
+	<dict>
+		<key>Title</key>
+		<string>星期五</string>
+		<key>RegexName</key>
+		<string>friarray</string>
+		<key>Color</key>
+		<string>#999900</string>
+	</dict>
+	<dict>
+		<key>Title</key>
+		<string>星期六</string>
+		<key>RegexName</key>
+		<string>satarray</string>
+		<key>Color</key>
+		<string>#000066</string>
+	</dict>
+</array>
+</plist>
