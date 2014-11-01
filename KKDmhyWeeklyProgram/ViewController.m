@@ -13,6 +13,7 @@
 #import "AnimeCell.h"
 #import "UIImageView+WebCache.h"
 #import "FansubTableViewController.h"
+#import "UINavigationController+M13ProgressViewBar.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -57,26 +58,14 @@
     [self.animeCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"AnimeCell"];
 
     
-    NSString *sourcePath = [[NSBundle mainBundle] pathForResource:@"program" ofType:@"html"];
-    NSString *htmlSource = [NSString stringWithContentsOfFile:sourcePath encoding:NSUTF8StringEncoding error:NULL];
-    [self parseSource:htmlSource];
+//    //load html form file
+//    NSString *sourcePath = [[NSBundle mainBundle] pathForResource:@"program" ofType:@"html"];
+//    NSString *htmlSource = [NSString stringWithContentsOfFile:sourcePath encoding:NSUTF8StringEncoding error:NULL];
+//    [self parseSource:htmlSource];
     
-    
-    //send request
-//    NSString* url = @"http://share.dmhy.org/cms/page/name/programme.html";
-//    
-//    __weak typeof(self) weakSelf = self;
-//    __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
-//    __weak ASIHTTPRequest *weakRequest = request;
-//    [request setCompletionBlock:^{
-//        
-//        NSString *responseString = [weakRequest responseString];
-//        [weakSelf parseSource:responseString];
-//    }];
-//    [request setFailedBlock:^{
-//        NSError *error = [weakRequest error];
-//    }];
-//    [request startAsynchronous];
+    //get html
+    [self loadDmhyHtml];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,6 +75,33 @@
 
 
 #pragma mark - action
+
+- (void)loadDmhyHtml{
+    
+    [self.navigationController setIndeterminate:YES];
+    self.navigationItem.rightBarButtonItem = nil;
+    
+    NSString* url = @"http://share.dmhy.org/cms/page/name/programme.html";
+    
+    __weak typeof(self) weakSelf = self;
+    __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+    __weak ASIHTTPRequest *weakRequest = request;
+    [request setCompletionBlock:^{
+        [weakSelf.navigationController setIndeterminate:NO];
+        
+        NSString *responseString = [weakRequest responseString];
+        [weakSelf parseSource:responseString];
+    }];
+    [request setFailedBlock:^{
+        //disable loading animation
+        [weakSelf.navigationController setIndeterminate:NO];
+        
+        //retry buttom
+        UIBarButtonItem* retryBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(loadDmhyHtml)];
+        weakSelf.navigationItem.rightBarButtonItem = retryBtn;
+    }];
+    [request startAsynchronous];
+}
 
 - (void)parseSource:(NSString *)htmlSource{
     
@@ -150,6 +166,7 @@
 }
 
 
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -183,7 +200,6 @@
     cell.title.backgroundColor = [self colorFromHexString:[dayDict objectForKey:@"Color"]];
     [cell.image sd_setImageWithURL:[NSURL URLWithString:program.imageUrl]
                   placeholderImage:nil options:SDWebImageRefreshCached];
-
     
     return cell;
 }
