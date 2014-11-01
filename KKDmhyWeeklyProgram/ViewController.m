@@ -18,7 +18,7 @@
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 #define kMargin 0
-#define kCellHeight 180
+#define kCellScaleRatio (181.0 / 100.0)
 
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate>{
     
@@ -225,7 +225,10 @@
                   layout:(UICollectionViewFlowLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
 
-    CGSize cellSize = CGSizeMake(CGRectGetWidth(self.view.frame) / 3, kCellHeight);
+    CGFloat width = CGRectGetWidth(self.view.frame) / 3.0;
+    
+    
+    CGSize cellSize = CGSizeMake(width , width * kCellScaleRatio);
     
     return cellSize;
 }
