@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -18,13 +17,15 @@
                         <rect key="frame" x="0.0" y="47" width="100" height="134"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="G1T-WL-f22" secondAttribute="height" multiplier="115:154" id="MI3-CR-mLu"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="5hS-yH-yRk"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="134" id="AFD-7C-MT8"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovV-bc-Q2K">
                         <rect key="frame" x="0.0" y="0.0" width="100" height="47"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="47" id="EHa-rp-bbZ"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="3JV-EU-3SR"/>
+                            <constraint firstAttribute="height" constant="47" id="mqT-e9-Ci4"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,7 +35,8 @@
                         <rect key="frame" x="99" y="0.0" width="1" height="181"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="1" id="Iy5-Xc-nNL"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="181" id="dKu-5v-IGR"/>
+                            <constraint firstAttribute="width" constant="1" id="oY8-jA-Y68"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -42,17 +44,18 @@
             </view>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="G1T-WL-f22" secondAttribute="bottom" id="7PV-tI-IDN"/>
-                <constraint firstAttribute="centerX" secondItem="ovV-bc-Q2K" secondAttribute="centerX" id="Dv4-N4-Vl8"/>
-                <constraint firstAttribute="centerX" secondItem="G1T-WL-f22" secondAttribute="centerX" id="GoU-dq-nfY"/>
-                <constraint firstAttribute="trailing" secondItem="ovV-bc-Q2K" secondAttribute="trailing" id="JY1-GQ-JMP"/>
-                <constraint firstItem="G1T-WL-f22" firstAttribute="top" secondItem="ovV-bc-Q2K" secondAttribute="bottom" id="JfZ-ce-H8T"/>
-                <constraint firstItem="ovV-bc-Q2K" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Wjp-Ou-V7i"/>
-                <constraint firstItem="ovV-bc-Q2K" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="aAt-yX-95t"/>
-                <constraint firstAttribute="bottom" secondItem="dmD-yx-nXV" secondAttribute="bottom" id="dZF-En-2xm"/>
-                <constraint firstItem="dmD-yx-nXV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jPU-FI-0yt"/>
-                <constraint firstAttribute="trailing" secondItem="G1T-WL-f22" secondAttribute="trailing" id="jUq-09-cqF"/>
-                <constraint firstAttribute="trailing" secondItem="dmD-yx-nXV" secondAttribute="trailing" id="tlG-MN-tgs"/>
+                <constraint firstAttribute="trailing" secondItem="G1T-WL-f22" secondAttribute="trailing" id="3zI-tP-om1"/>
+                <constraint firstItem="G1T-WL-f22" firstAttribute="top" secondItem="ovV-bc-Q2K" secondAttribute="bottom" id="4Ol-g7-w2L"/>
+                <constraint firstItem="dmD-yx-nXV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5Z0-Xm-f69"/>
+                <constraint firstItem="dmD-yx-nXV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="99" id="A7q-ww-apj"/>
+                <constraint firstAttribute="bottom" secondItem="G1T-WL-f22" secondAttribute="bottom" id="BwA-x6-bRi"/>
+                <constraint firstItem="G1T-WL-f22" firstAttribute="top" secondItem="ovV-bc-Q2K" secondAttribute="bottom" id="Mf0-ZO-bMQ"/>
+                <constraint firstAttribute="bottom" secondItem="dmD-yx-nXV" secondAttribute="bottom" id="UgR-Wj-94m"/>
+                <constraint firstItem="G1T-WL-f22" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Zmz-Lv-hTF"/>
+                <constraint firstAttribute="trailing" secondItem="ovV-bc-Q2K" secondAttribute="trailing" id="pEl-J6-ZK5"/>
+                <constraint firstItem="ovV-bc-Q2K" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="phc-F8-LJO"/>
+                <constraint firstItem="ovV-bc-Q2K" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="q8Y-Hx-YVl"/>
+                <constraint firstAttribute="trailing" secondItem="dmD-yx-nXV" secondAttribute="trailing" id="vfm-vs-n8X"/>
             </constraints>
             <size key="customSize" width="100" height="181"/>
             <connections>
