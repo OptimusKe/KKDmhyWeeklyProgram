@@ -29,7 +29,8 @@
     NSArray* detailArray = [source componentsSeparatedByString:@","];
     
     self.imageUrl = [detailArray objectAtIndex:0];
-    self.animeName = [detailArray objectAtIndex:1];
+    NSString *removeNbspString = [[[detailArray objectAtIndex:1] componentsSeparatedByString:@"&nbsp;"] componentsJoinedByString:@""];
+    self.animeName = removeNbspString;
     self.searchLink = [detailArray objectAtIndex:2];
     
     NSString* subSource = [detailArray objectAtIndex:3];
