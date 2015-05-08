@@ -45,8 +45,12 @@
         NSString *encodingLink = [fansubLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSString *fansubTitle = [ele text];
         
-        [self.fansubsArray addObject:@{@"Title" : fansubTitle,
-                                       @"Link"  : encodingLink}];
+        
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              fansubTitle,@"Title",
+                              encodingLink,@"Link",nil];
+        
+        [self.fansubsArray addObject:dict];
     }
     
     self.officialSite = [detailArray objectAtIndex:4];
